@@ -127,7 +127,7 @@ local function MayorOptns()
 			end
 			maypanel:AddItem(RemLaws)
 	MayCat:SetContents(maypanel)
-	MayCat:SetSkin("DarkRP")
+	MayCat:SetSkin("Derma")
 	return MayCat
 end
 
@@ -237,7 +237,7 @@ local function CPOptns()
 				CPpanel:AddItem(GiveLicense)
 			end
 	CPCat:SetContents(CPpanel)
-	CPCat:SetSkin("DarkRP")
+	CPCat:SetSkin("Derma")
 	return CPCat
 end
 
@@ -267,7 +267,7 @@ local function CitOptns()
 		Citpanel:AddItem(jobentry)
 		
 	CitCat:SetContents(Citpanel)
-	CitCat:SetSkin("DarkRP")
+	CitCat:SetSkin("Derma")
 	return CitCat
 end
 
@@ -297,7 +297,7 @@ local function MobOptns()
 		Mobpanel:AddItem(agendaentry)
 		
 	MobCat:SetContents(Mobpanel)
-	MobCat:SetSkin("DarkRP")
+	MobCat:SetSkin("Derma")
 	return MobCat
 end
 
@@ -328,7 +328,7 @@ function MoneyTab()
 
 				MoneyPanel:AddItem(SpawnMoneyButton)
 			MoneyCat:SetContents(MoneyPanel)
-			MoneyCat:SetSkin("DarkRP")
+			MoneyCat:SetSkin("Derma")
 		
 		
 			local Commands = vgui.Create("DCollapsibleCategory")
@@ -398,7 +398,7 @@ function MoneyTab()
 					ActionsPanel:AddItem(UnOwnAllDoors)
 			Commands:SetContents(ActionsPanel)
 		FirstTabPanel:AddItem(MoneyCat)
-		Commands:SetSkin("DarkRP")
+		Commands:SetSkin("Derma")
 		FirstTabPanel:AddItem(Commands)
 		
 		if LocalPlayer():Team() == TEAM_MAYOR then
@@ -431,7 +431,7 @@ function JobsTab()
 		Panel:SetSpacing(1)
 		Panel:EnableHorizontal( true )
 		Panel:EnableVerticalScrollbar( true )
-		Panel:SetSkin("DarkRP")
+		Panel:SetSkin("Derma")
 		
 		
 		local Info = {}
@@ -447,7 +447,7 @@ function JobsTab()
 			Information:SetSpacing(10)
 			Information:EnableHorizontal( false )
 			Information:EnableVerticalScrollbar( true )
-			Information:SetSkin("DarkRP")
+			Information:SetSkin("Derma")
 			function Information:Rebuild() -- YES IM OVERRIDING IT AND CHANGING ONLY ONE LINE BUT I HAVE A FUCKING GOOD REASON TO DO IT!
 				local Offset = 0
 				if ( self.Horizontal ) then
@@ -661,7 +661,7 @@ function EntitiesTab()
 					AddIcon("models/Items/BoxMRounds.mdl", string.format(LANGUAGE.buy_a, "Rifle ammo", CUR .. tostring(GetConVarNumber("ammoriflecost"))), "/buyammo rifle")
 					AddIcon("models/Items/BoxBuckshot.mdl", string.format(LANGUAGE.buy_a, "Shotgun ammo", CUR .. tostring(GetConVarNumber("ammoshotguncost"))), "/buyammo shotgun")
 			WepCat:SetContents(WepPanel)
-			WepCat:SetSkin("DarkRP")
+			WepCat:SetSkin("Derma")
 			self:AddItem(WepCat)
 			
 			local EntCat = vgui.Create("DCollapsibleCategory")
@@ -709,7 +709,7 @@ function EntitiesTab()
 						end
 					end
 			EntCat:SetContents(EntPanel)
-			EntCat:SetSkin("DarkRP")
+			EntCat:SetSkin("Derma")
 			self:AddItem(EntCat)
 			
 			
@@ -743,14 +743,14 @@ function EntitiesTab()
 				end
 			if founds ~= 0 then
 				VehicleCat:SetContents(VehiclePanel)
-				VehicleCat:SetSkin("DarkRP")
+				VehicleCat:SetSkin("Derma")
 				self:AddItem(VehicleCat)
 			else
 				VehiclePanel:Remove()
 				VehicleCat:Remove()
 			end
 		end
-	EntitiesPanel:SetSkin("DarkRP")
+	EntitiesPanel:SetSkin("Derma")
 	EntitiesPanel:Update()	
 	return EntitiesPanel
 end
@@ -788,7 +788,7 @@ function RPHUDTab()
 			end
 			backgrndpanel:AddItem(resetbackgrnd)
 		backgrndcat:SetContents(backgrndpanel)
-		backgrndcat:SetSkin("DarkRP")
+		backgrndcat:SetSkin("Derma")
 		HUDTABpanel:AddItem(backgrndcat)
 		
 		hforegrndcat = vgui.Create("DCollapsibleCategory")
@@ -815,7 +815,7 @@ function RPHUDTab()
 			end
 			hforegrndpanel:AddItem(resethforegrnd)
 		hforegrndcat:SetContents(hforegrndpanel)
-		hforegrndcat:SetSkin("DarkRP")
+		hforegrndcat:SetSkin("Derma")
 		HUDTABpanel:AddItem(hforegrndcat)
 		
 		
@@ -843,7 +843,7 @@ function RPHUDTab()
 			end
 			hbackgrndpanel:AddItem(resethbackgrnd)
 		hbackgrndcat:SetContents(hbackgrndpanel)
-		hbackgrndcat:SetSkin("DarkRP")
+		hbackgrndcat:SetSkin("Derma")
 		HUDTABpanel:AddItem(hbackgrndcat)
 		
 		hTextcat = vgui.Create("DCollapsibleCategory")
@@ -870,7 +870,7 @@ function RPHUDTab()
 			end
 			hTextpanel:AddItem(resethText)
 		hTextcat:SetContents(hTextpanel)
-		hTextcat:SetSkin("DarkRP")
+		hTextcat:SetSkin("Derma")
 		HUDTABpanel:AddItem(hTextcat)
 		
 		jobs1cat = vgui.Create("DCollapsibleCategory")
@@ -897,7 +897,7 @@ function RPHUDTab()
 			end
 			jobs1panel:AddItem(resetjobs1)
 		jobs1cat:SetContents(jobs1panel)
-		jobs1cat:SetSkin("DarkRP")
+		jobs1cat:SetSkin("Derma")
 		HUDTABpanel:AddItem(jobs1cat)
 		
 		jobs2cat = vgui.Create("DCollapsibleCategory")
@@ -924,7 +924,7 @@ function RPHUDTab()
 			end
 			jobs2panel:AddItem(resetjobs2) 
 		jobs2cat:SetContents(jobs2panel)
-		jobs2cat:SetSkin("DarkRP")
+		jobs2cat:SetSkin("Derma")
 		HUDTABpanel:AddItem(jobs2cat)
 		
 		salary1cat = vgui.Create("DCollapsibleCategory")
@@ -951,7 +951,7 @@ function RPHUDTab()
 			end
 			salary1panel:AddItem(resetsalary1)
 		salary1cat:SetContents(salary1panel)
-		salary1cat:SetSkin("DarkRP")
+		salary1cat:SetSkin("Derma")
 		HUDTABpanel:AddItem(salary1cat)
 		
 		salary2cat = vgui.Create("DCollapsibleCategory")
@@ -978,7 +978,7 @@ function RPHUDTab()
 			end
 			salary2panel:AddItem(resetsalary2)
 		salary2cat:SetContents(salary2panel)
-		salary2cat:SetSkin("DarkRP")
+		salary2cat:SetSkin("Derma")
 		HUDTABpanel:AddItem(salary2cat)
 		
 		local HudWidthCat = vgui.Create("DCollapsibleCategory")
@@ -1001,7 +1001,7 @@ function RPHUDTab()
 			end
 			HudWidthpanel:AddItem(resetHudWidth)
 		HudWidthCat:SetContents(HudWidthpanel)
-		HudWidthCat:SetSkin("DarkRP")
+		HudWidthCat:SetSkin("Derma")
 		HUDTABpanel:AddItem(HudWidthCat)
 		
 		local HudHeightCat = vgui.Create("DCollapsibleCategory")
@@ -1024,10 +1024,10 @@ function RPHUDTab()
 			end
 			HudHeightpanel:AddItem(resetHudHeight)
 		HudHeightCat:SetContents(HudHeightpanel)
-		HudHeightCat:SetSkin("DarkRP")
+		HudHeightCat:SetSkin("Derma")
 		HUDTABpanel:AddItem(HudHeightCat)
 	end
-	HUDTABpanel:SetSkin("DarkRP")
+	HUDTABpanel:SetSkin("Derma")
 	return HUDTABpanel
 end
 
@@ -1081,7 +1081,7 @@ function RPAdminTab()
 					end
 				end
 			ToggleCat:SetContents(TogglePanel)
-			ToggleCat:SetSkin("DarkRP")
+			ToggleCat:SetSkin("Derma")
 			self:AddItem(ToggleCat)
 			function ToggleCat:Toggle()
 				self:SetExpanded( !self:GetExpanded() ) 
@@ -1158,11 +1158,11 @@ function RPAdminTab()
 					end
 				end
 			ValueCat:SetContents(ValuePanel)
-			ValueCat:SetSkin("DarkRP")
+			ValueCat:SetSkin("Derma")
 			self:AddItem(ValueCat)
 		end
 		AdminPanel:Update()
-	AdminPanel:SetSkin("DarkRP")
+	AdminPanel:SetSkin("Derma")
 	return AdminPanel
 end
 
