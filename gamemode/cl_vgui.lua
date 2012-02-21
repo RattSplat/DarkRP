@@ -97,7 +97,7 @@ local function MsgDoVote(msg)
 
 	PanelNum = PanelNum + 140
 	VoteVGUI[voteid .. "vote"] = panel
-	panel:SetSkin("DarkRP")
+	panel:SetSkin("Derma")
 end
 usermessage.Hook("DoVote", MsgDoVote)
 
@@ -191,7 +191,7 @@ local function MsgDoQuestion(msg)
 	PanelNum = PanelNum + 300
 	QuestionVGUI[quesid .. "ques"] = panel
 
-	panel:SetSkin("DarkRP")
+	panel:SetSkin("Derma")
 end
 usermessage.Hook("DoQuestion", MsgDoQuestion)
 
@@ -250,8 +250,9 @@ local function ChangeJobVGUI()
 		F4Menu:SetSize(770, 580)
 		F4Menu:Center()
 		F4Menu:SetVisible( true )
+        F4Menu:SetBackgroundBlur( true )
 		F4Menu:MakePopup( )
-		F4Menu:SetTitle("Options menu")
+		F4Menu:SetTitle("[Roleplay Menu]")
 		F4Tabs = {MoneyTab(), JobsTab(), EntitiesTab(), RPHUDTab()}
 		if LocalPlayer():IsAdmin() then
 			table.insert(F4Tabs, RPAdminTab())
@@ -259,10 +260,10 @@ local function ChangeJobVGUI()
 		if LocalPlayer():IsSuperAdmin() then
 			table.insert(F4Tabs, RPLicenseWeaponsTab())
 		end
-		F4Menu:SetSkin("DarkRP")
+		F4Menu:SetSkin("Derma")
 	else
 		F4Menu:SetVisible(true)
-		F4Menu:SetSkin("DarkRP")
+		F4Menu:SetSkin("Derma")
 	end
 
 	hasReleasedF4 = false
@@ -287,26 +288,26 @@ local function ChangeJobVGUI()
 		F4MenuTabs:SetPos(5, 25)
 		F4MenuTabs:SetSize(760, 550)
 		--The tabs: Look in showteamtabs.lua for more info
-		F4MenuTabs:AddSheet("Money/Commands", F4Tabs[1], "gui/silkicons/plugin", false, false)
-		F4MenuTabs:AddSheet("Jobs", F4Tabs[2], "gui/silkicons/arrow_refresh", false, false)
-		F4MenuTabs:AddSheet("Entities/weapons", F4Tabs[3], "gui/silkicons/application_view_tile", false, false)
+		F4MenuTabs:AddSheet("Money/Commands", F4Tabs[1], "gui/silkicons/application_view_tile", false, false)
+		F4MenuTabs:AddSheet("Jobs", F4Tabs[2], "gui/silkicons/group", false, false)
+		F4MenuTabs:AddSheet("Store", F4Tabs[3], "gui/silkicons/box", false, false)
 		F4MenuTabs:AddSheet("HUD", F4Tabs[4], "gui/silkicons/user", false, false)
 		if LocalPlayer():IsAdmin() or LocalPlayer().DarkRPVars.Privadmin then
-			F4MenuTabs:AddSheet("Admin", F4Tabs[5], "gui/silkicons/wrench", false, false)
+			F4MenuTabs:AddSheet("Admin", F4Tabs[5], "gui/silkicons/exclamation", false, false)
 		end
 		if LocalPlayer():IsSuperAdmin() then
-			F4MenuTabs:AddSheet("License weapons", F4Tabs[6], "gui/silkicons/wrench", false, false)
+			F4MenuTabs:AddSheet("License weapons", F4Tabs[6], "gui/silkicons/page_white_wrench", false, false)
 		end
 	end
 
-	for _, panel in pairs(F4Tabs) do panel:Update() panel:SetSkin("DarkRP") end
+	for _, panel in pairs(F4Tabs) do panel:Update() panel:SetSkin("Derma") end
 
  	function F4Menu:Close()
 		F4Menu:SetVisible(false)
-		F4Menu:SetSkin("DarkRP")
+		F4Menu:SetSkin("Derma")
 	end
 
-	F4Menu:SetSkin("DarkRP")
+	F4Menu:SetSkin("Derma")
 end
 usermessage.Hook("ChangeJobVGUI", ChangeJobVGUI)
 
@@ -574,7 +575,7 @@ local function KeysMenu(um)
 		Frame:Close()
 	end
 
-	Frame:SetSkin("DarkRP")
+	Frame:SetSkin("Derma")
 end
 usermessage.Hook("KeysMenu", KeysMenu)
 
@@ -588,7 +589,7 @@ local function TradeMenuClient(handler, id, encoded, decoded)
 	TradeFrame:Center()
 	TradeFrame:SetTitle("Initialize a trade")
 	TradeFrame:MakePopup()
-	TradeFrame:SetSkin("DarkRP")
+	TradeFrame:SetSkin("Derma")
 
 	local ItemsForm = vgui.Create("DPanelList", TradeFrame)
 	ItemsForm:SetSize((#items * 64), 64)
@@ -629,7 +630,7 @@ local function TradeMenuRecipient(um)
 	TradeFrame:Center()
 	TradeFrame:SetTitle("Trade interface")
 	TradeFrame:MakePopup()
-	TradeFrame:SetSkin("DarkRP")
+	TradeFrame:SetSkin("Derma")
 	function TradeFrame:Close()
 		LocalPlayer():ConCommand("rp_killtrade " .. id)
 		self:Remove()
@@ -743,7 +744,7 @@ local function TradeRequest(um)
 
 	PanelNum = PanelNum + 140
 	VoteVGUI[id .. "_trade"] = panel
-	panel:SetSkin("DarkRP")
+	panel:SetSkin("Derma")
 
 	timer.Simple(20, function()
 		LocalPlayer():ConCommand("rp_tradevote " .. id .. " no")
