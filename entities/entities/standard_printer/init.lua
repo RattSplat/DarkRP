@@ -82,9 +82,9 @@ function ENT:CreateMoneybag()
 	if not ValidEntity(self) then return end
 	if self:IsOnFire() then return end
 	local MoneyPos = self:GetPos()
-	local X = 40
+	local X = 10
 	local Y = 250
-	if math.random(1, X) == 3 then self:BurstIntoFlames() end
+	if math.random(1, X) == 1 then self:BurstIntoFlames() end
 	local amount = self:GetNWInt("PrintA") + Y
 	self:SetNWInt("PrintA",amount)
 	
@@ -119,22 +119,6 @@ function ENT:Touch( hitEnt )
 
 		hitEnt:SetPos(self.Entity:GetPos() + Vector(1.9534912109375, 9.9049682617188, 6.304988861084))
 		hitEnt:SetAngles(self.Entity:GetAngles() + Vector(0, 90, 0))
-		constraint.Weld(hitEnt, self.Entity, 0, 0, 0, true)
-
-		self.Entity:SetAngles(self.OldAngles)
-
-		local phys = hitEnt:GetPhysicsObject()
-		if (phys:IsValid()) then
-			phys:Wake()
-			phys:SetMass(1)
-		end
-	elseif hitEnt.IsCollector and not self.Collector then
-		self.Collector = hitEnt
-		self.OldAngles = self.Entity:GetAngles()
-		self.Entity:SetAngles(Vector(0, 0, 0))
-
-		hitEnt:SetPos(self.Entity:GetPos() + Vector(-4.62841796875, -6.8973388671875, 14.61595916748))
-		hitEnt:SetAngles(self.Entity:GetAngles() + Vector(89.261619508266, 6.043903529644, -19.906075708568))
 		constraint.Weld(hitEnt, self.Entity, 0, 0, 0, true)
 
 		self.Entity:SetAngles(self.OldAngles)

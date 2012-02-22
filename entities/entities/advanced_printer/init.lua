@@ -82,9 +82,9 @@ function ENT:CreateMoneybag()
 	if not ValidEntity(self) then return end
 	if self:IsOnFire() then return end
 	local MoneyPos = self:GetPos()
-	local X = 40
+	local X = 10
 	local Y = 875
-	if math.random(1, X) == 3 then self:BurstIntoFlames() end
+	if math.random(1, X) == 1 then self:BurstIntoFlames() end
 	local amount = self:GetNWInt("PrintA") + Y
 	self:SetNWInt("PrintA",amount)
 	
