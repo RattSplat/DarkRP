@@ -69,7 +69,7 @@ local function DrawHealth()
 	draw.RoundedBox(Border, RelativeX + 4, RelativeY - 30, HUDWidth - 8, 20, ConVars.Healthbackground)
 	draw.RoundedBox(Border, RelativeX + 5, RelativeY - 29, (HUDWidth - 9) * DrawHealth, 18, ConVars.Healthforeground)
 
-	draw.DrawText(math.Max(0, math.Round(LocalPlayer():Health())), "TargetID", RelativeX + 4 + (HUDWidth - 8)/2, RelativeY - 32, ConVars.HealthText, 1)
+	draw.DrawText(math.Max(0, math.Round(LocalPlayer():Health())), "ChatFont", RelativeX + 4 + (HUDWidth - 8)/2, RelativeY - 32, ConVars.HealthText, 1)
 end
 
 local function DrawInfo()
@@ -80,14 +80,14 @@ local function DrawInfo()
 	LANGUAGE.job .. (LocalPlayer().DarkRPVars.job or "") .. "\n"..
 	LANGUAGE.wallet .. CUR .. (formatNumber(LocalPlayer().DarkRPVars.money) or 0)
 
-	draw.DrawText(Salary, "TargetID", RelativeX + 5, RelativeY - HUDHeight + 6, ConVars.salary1, 0)
-	draw.DrawText(Salary, "TargetID", RelativeX + 4, RelativeY - HUDHeight + 5, ConVars.salary2, 0)
+	draw.DrawText(Salary, "ChatFont", RelativeX + 5, RelativeY - HUDHeight + 6, ConVars.salary1, 0)
+	draw.DrawText(Salary, "ChatFont", RelativeX + 4, RelativeY - HUDHeight + 5, ConVars.salary2, 0)
 
-	surface.SetFont("TargetID")
+	surface.SetFont("ChatFont")
 	local w, h = surface.GetTextSize(Salary)
 
-	draw.DrawText(JobWallet, "TargetID", RelativeX + 5, RelativeY - HUDHeight + h + 6, ConVars.Job1, 0)
-	draw.DrawText(JobWallet, "TargetID", RelativeX + 4, RelativeY - HUDHeight + h + 5, ConVars.Job2, 0)
+	draw.DrawText(JobWallet, "ChatFont", RelativeX + 5, RelativeY - HUDHeight + h + 6, ConVars.Job1, 0)
+	draw.DrawText(JobWallet, "ChatFont", RelativeX + 4, RelativeY - HUDHeight + h + 5, ConVars.Job2, 0)
 end
 
 local Page = surface.GetTextureID("gui/silkicons/page")
