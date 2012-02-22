@@ -24,10 +24,14 @@ end
 function ENT:OnTakeDamage(dmg)
 	if self.burningup then return end
 
-	self.damage = self.damage - dmg:GetDamage()
+	self.damage = (self.damage or 100) - dmg:GetDamage()
 	if self.damage <= 0 then
-		self:Destruct()
-		self:Remove()
+			self:Destruct()
+			self:Remove()
+    if Charges == 0 then
+			self:Destruct()
+			self:Remove()
+		end
 	end
 end
 
@@ -38,9 +42,5 @@ function ENT:Destruct()
 	effectdata:SetOrigin(vPoint)
 	effectdata:SetScale(1)
 	util.Effect("Explosion", effectdata)
-	Notify(self:GetNWEntity("owning_ent"), 1, 4, "Your money printer has exploded!")
+	Notify(self:GetNWEntity("owning_ent"), 1, 4, "Your printer cooler has exploded!")
 end
-
-function ENT:Use( activator, caller )
-	self.Entity:SetNWInt("charges", Charges)
-end 

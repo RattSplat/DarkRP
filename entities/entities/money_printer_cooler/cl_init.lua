@@ -20,8 +20,8 @@ function DrawInfoCooler()
 			end
 			local text = owner .. "Printer Cooler\nCharges: "..tr.Entity:GetNWInt("charges")
 
-			draw.DrawText(text, "TargetID", pos.x + 1, pos.y + 1, Color(0, 0, 0, 200), 1)
-			draw.DrawText(text, "TargetID", pos.x, pos.y, Color(255, 255, 255, 200), 1)
+			draw.DrawText(text, "ChatFont", pos.x + 1, pos.y + 1, Color(0, 0, 0, 200), 1)
+			draw.DrawText(text, "ChatFont", pos.x, pos.y, Color(255, 255, 255, 200), 1)
 		end
 	end
 end
