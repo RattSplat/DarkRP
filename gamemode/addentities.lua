@@ -15,7 +15,7 @@ AddEntity("Advanced printer", "advanced_printer", "models/props_c17/consolebox01
 AddEntity("Golden printer", "gold_printer", "models/props_c17/consolebox01a.mdl", 5000, 2, "/buygold_printer")
 AddEntity("Ruby printer", "ruby_printer", "models/props_c17/consolebox01a.mdl", 7500, 1, "/buyruby_printer")
 AddEntity("Diamond printer", "diamond_printer", "models/props_c17/consolebox01a.mdl", 10000, 1, "/buydiamond_printer")
-AddEntity("Printer cooler", "money_printer_cooler", "models/props_lab/reciever01a.mdl", 750, 8, "/buymoney_printer_cooler")
+AddEntity("Printer cooler", "money_printer_cooler", "models/props_lab/reciever01a.mdl", 300, 8, "/buymoney_printer_cooler")
 
 
 /*
