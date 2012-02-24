@@ -11,11 +11,11 @@ AddCustomShipment("Pump shotgun", "models/weapons/w_shot_m3super90.mdl", "weapon
 AddCustomShipment("Sniper rifle", "models/weapons/w_snip_g3sg1.mdl", "ls_sniper", 3750, 10, false, nil, false, {TEAM_GUN}) 
 
 AddEntity("Standard printer", "standard_printer", "models/props_c17/consolebox01a.mdl", 1000, 2, "/buystandard_printer")
-AddEntity("Advanced printer", "advanced_printer", "models/props_c17/consolebox01a.mdl", 3500, 2, "/buyadvanced_printer")
-AddEntity("Golden printer", "gold_printer", "models/props_c17/consolebox01a.mdl", 5000, 2, "/buygold_printer")
-AddEntity("Ruby printer", "ruby_printer", "models/props_c17/consolebox01a.mdl", 7500, 1, "/buyruby_printer")
-AddEntity("Diamond printer", "diamond_printer", "models/props_c17/consolebox01a.mdl", 10000, 1, "/buydiamond_printer")
-AddEntity("Printer cooler", "money_printer_cooler", "models/props_lab/reciever01a.mdl", 300, 8, "/buymoney_printer_cooler")
+AddEntity("Advanced printer", "advanced_printer", "models/props_c17/consolebox01a.mdl", 5000, 2, "/buyadvanced_printer")
+AddEntity("Golden printer", "gold_printer", "models/props_c17/consolebox01a.mdl", 15000, 2, "/buygold_printer")
+AddEntity("Ruby printer", "ruby_printer", "models/props_c17/consolebox01a.mdl", 30000, 1, "/buyruby_printer")
+AddEntity("Diamond printer", "diamond_printer", "models/props_c17/consolebox01a.mdl", 50000, 1, "/buydiamond_printer")
+AddEntity("Printer cooler", "money_printer_cooler", "models/props_lab/reciever01a.mdl", 3000, 8, "/buymoney_printer_cooler")
 
 
 /*
