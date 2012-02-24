@@ -13,7 +13,7 @@ local function MsgDoVote(msg)
 	local OldTime = CurTime()
 	if string.find(voteid, LocalPlayer():EntIndex()) then return end --If it's about you then go away
 
-	LocalPlayer():EmitSound("Town.d1_town_02_elevbell1", 100, 100)
+	LocalPlayer():EmitSound("garrysmod/content_downloaded.wav", 100, 100)
 	local panel = vgui.Create("DFrame")
 	panel:SetPos(3 + PanelNum, ScrH() / 2 - 50)
 	panel:SetTitle("Vote")
@@ -119,7 +119,7 @@ local function MsgDoQuestion(msg)
 		timeleft = 100
 	end
 	local OldTime = CurTime()
-	LocalPlayer():EmitSound("Town.d1_town_02_elevbell1", 100, 100)
+	LocalPlayer():EmitSound("garrysmod/content_downloaded.wav", 100, 100)
 	local panel = vgui.Create("DFrame")
 	panel:SetPos(3 + PanelNum, ScrH() / 2 - 50)--Times 140 because if the quesion is the second screen, the first screen is always a vote screen.
 	panel:SetSize(300, 140)
@@ -288,7 +288,7 @@ local function ChangeJobVGUI()
 		F4MenuTabs:SetPos(5, 25)
 		F4MenuTabs:SetSize(760, 550)
 		--The tabs: Look in showteamtabs.lua for more info
-		F4MenuTabs:AddSheet("Money/Commands", F4Tabs[1], "gui/silkicons/application_view_tile", false, false)
+		F4MenuTabs:AddSheet("Actions", F4Tabs[1], "gui/silkicons/application_view_tile", false, false)
 		F4MenuTabs:AddSheet("Jobs", F4Tabs[2], "gui/silkicons/group", false, false)
 		F4MenuTabs:AddSheet("Store", F4Tabs[3], "gui/silkicons/box", false, false)
 		F4MenuTabs:AddSheet("HUD", F4Tabs[4], "gui/silkicons/user", false, false)
