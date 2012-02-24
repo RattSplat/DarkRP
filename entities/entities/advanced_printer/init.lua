@@ -16,7 +16,7 @@ function ENT:Initialize()
 	self.sparking = false
 	self.damage = 100
 	self.IsMoneyPrinter = true
-	timer.Simple(math.random(0, 60), PrintMore, self)
+	timer.Simple(math.random(30, 60), PrintMore, self)
 	self:SetNWInt("PrintA",0)
 end
 
@@ -37,7 +37,7 @@ function ENT:Destruct()
 	effectdata:SetOrigin(vPoint)
 	effectdata:SetScale(1)
 	util.Effect("Explosion", effectdata)
-	Notify(self:GetNWEntity("owning_ent"), 1, 4, "Your money printer has exploded!")
+	Notify(self.dt.owning_ent, 1, 4, "Your Advanced Printer has exploded!")
 end
 
 function ENT:BurstIntoFlames()
@@ -45,8 +45,9 @@ function ENT:BurstIntoFlames()
 		Notify(self:GetNWEntity("owning_ent"), 1, 4, "Your money printer's cooler has used up a charge.\nRemaining charges: "..self.Cooler:GetNWInt("charges"))
 		self.Cooler:SetNWInt("charges", self.Cooler:GetNWInt("charges") - 1)
 	else
-		Notify(self:GetNWEntity("owning_ent"), 1, 4, "Your money printer is overheating!")
+		Notify(self.dt.owning_ent, 0, 4, "Your Advanced Printer is overheating!")
 		self.burningup = true
+        self:SetColor(237,28,36,255)
 		local burntime = math.random(8, 18)
 		self:Ignite(burntime, 0)
 		timer.Simple(burntime, self.Fireball, self)
@@ -83,13 +84,13 @@ function ENT:CreateMoneybag()
 	if self:IsOnFire() then return end
 	local MoneyPos = self:GetPos()
 	local X = 10
-	local Y = 875
+	local Y = 750
 	if math.random(1, X) == 1 then self:BurstIntoFlames() end
 	local amount = self:GetNWInt("PrintA") + Y
 	self:SetNWInt("PrintA",amount)
 	
 	self.sparking = false
-	timer.Simple(math.random(100, 350), PrintMore, self)
+	timer.Simple(math.random(250, 350), PrintMore, self)
 end
 
 function ENT:Think()
