@@ -60,48 +60,142 @@ local Scrw, Scrh, RelativeX, RelativeY
 /*---------------------------------------------------------------------------
 HUD Seperate Elements
 ---------------------------------------------------------------------------*/
+local hudwidth = 512
+local hudheight = 40
+
+local hudypos = ScrH() - hudheight
+
+local Health = 0
+local Armor = 0
+local function DrawPlayerInfo()
+	local midx = ScrW() / 2
+	
+	draw.RoundedBox(
+		6,
+		midx - (hudwidth / 2), hudypos,
+		hudwidth, hudheight,
+		Color( 0, 0, 0, 200 )
+	)
+	
+	
+	Health = (Health == LocalPlayer():Health() and Health) or Lerp(0.1, Health, LocalPlayer():Health())
+	
+	local hwid = math.Clamp( Health, 0, 100 ) * (((hudwidth / 2) - 5) / 100)
+	hwid = hwid > 4 and hwid or 4
+	
+	draw.RoundedBox( 
+		4,
+		//midx - hwid, hudypos + 5,
+		midx - hwid, (hudypos + hudheight) - 20,
+		hwid, 15,
+		Color( 34, 177, 76, 150 )
+	)
+	
+	draw.SimpleText(
+		"Health " .. tostring( math.Round( Health ) ) .. "%",
+		"ScoreboardText",
+		//midx - (hudwidth / 4), hudypos + 12,
+		midx - (hudwidth / 4), (hudypos + hudheight) - 13,
+		Color( 255, 255, 255, 255 ),
+		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER
+	)
+	
+	
+	Armor = (Armor == LocalPlayer():Armor() and Armor) or Lerp(0.1, Armor, LocalPlayer():Armor())
+	
+	local awid = math.Clamp( Armor, 0, 100 ) * (((hudwidth / 2) - 5) / 100)
+	awid = awid > 4 and awid or 4
+	
+	draw.RoundedBox( 
+		4,
+		//midx, hudypos + 5,
+		midx, (hudypos + hudheight) - 20,
+		awid, 15,
+		Color( 127, 127, 127, 150 )
+	)
+	
+	draw.SimpleText(
+		"Armor " .. tostring( math.Round( Armor ) ) .. "%",
+		"ScoreboardText",
+		//midx + (hudwidth / 4), hudypos + 12,
+		midx + (hudwidth / 4), (hudypos + hudheight) - 13,
+		Color( 255, 255, 255, 255 ),
+		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER
+	)
+	
+	
+	draw.SimpleText(
+		LANGUAGE.job .. (LocalPlayer().DarkRPVars.job or ""),
+		"ScoreboardText",
+		//midx - (hudwidth / 4), hudypos + 30,
+		midx - (hudwidth / 4), hudypos + 10,
+		Color( 34, 177, 76, 255 ),
+		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER
+	)
+	
+	
+	draw.SimpleText(
+		LANGUAGE.salary .. CUR .. (LocalPlayer().DarkRPVars.salary or 0),
+		"ScoreboardText",
+		//midx, hudypos + 30,
+		midx, hudypos + 10,
+		Color( 34, 177, 76, 255 ),
+		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER
+	)
+	
+	
+	draw.SimpleText(
+		LANGUAGE.wallet .. CUR .. (formatNumber(LocalPlayer().DarkRPVars.money) or 0),
+		"ScoreboardText",
+		//midx + (hudwidth / 4), hudypos + 30,
+		midx + (hudwidth / 4), hudypos + 10,
+		Color( 34, 177, 76, 255 ),
+		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER
+	)
+end
+
+/*
 local Health = 0
 local function DrawHealth()
-	Health = math.min(100, (Health == LocalPlayer():Health() and Health) or Lerp(0.1, Health, LocalPlayer():Health()))
-
-	local DrawHealth = math.Min(Health / GetConVarNumber("startinghealth"), 1)
+	Health = (Health == LocalPlayer():Health() and Health) or Lerp(0.1, Health, LocalPlayer():Health())
+	
+	local DrawHealth = Health / GetConVarNumber("startinghealth")
 	local Border = math.Min(6, math.pow(2, math.Round(3*DrawHealth)))
 	draw.RoundedBox(Border, RelativeX + 4, RelativeY - 30, HUDWidth - 8, 20, ConVars.Healthbackground)
 	draw.RoundedBox(Border, RelativeX + 5, RelativeY - 29, (HUDWidth - 9) * DrawHealth, 18, ConVars.Healthforeground)
 
-	draw.DrawText(math.Max(0, math.Round(LocalPlayer():Health())), "ChatFont", RelativeX + 4 + (HUDWidth - 8)/2, RelativeY - 32, ConVars.HealthText, 1)
+	draw.DrawText(math.Max(0, math.Round(Health)), "Trebuchet18", RelativeX + 4 + (HUDWidth - 8)/2, RelativeY - 32, ConVars.HealthText, 1)
 end
 
 local function DrawInfo()
-	LocalPlayer().DarkRPVars = LocalPlayer().DarkRPVars or {}
 	local Salary = 	LANGUAGE.salary .. CUR .. (LocalPlayer().DarkRPVars.salary or 0)
 
-	local JobWallet =
+	local JobWallet = 
 	LANGUAGE.job .. (LocalPlayer().DarkRPVars.job or "") .. "\n"..
 	LANGUAGE.wallet .. CUR .. (formatNumber(LocalPlayer().DarkRPVars.money) or 0)
 
-	draw.DrawText(Salary, "ChatFont", RelativeX + 5, RelativeY - HUDHeight + 6, ConVars.salary1, 0)
-	draw.DrawText(Salary, "ChatFont", RelativeX + 4, RelativeY - HUDHeight + 5, ConVars.salary2, 0)
-
-	surface.SetFont("ChatFont")
+	draw.DrawText(Salary, "Trebuchet18", RelativeX + 5, RelativeY - HUDHeight + 6, ConVars.salary1, 0)
+	draw.DrawText(Salary, "Trebuchet18", RelativeX + 4, RelativeY - HUDHeight + 5, ConVars.salary2, 0)
+	
+	surface.SetFont("Trebuchet18")
 	local w, h = surface.GetTextSize(Salary)
 
-	draw.DrawText(JobWallet, "ChatFont", RelativeX + 5, RelativeY - HUDHeight + h + 6, ConVars.Job1, 0)
-	draw.DrawText(JobWallet, "ChatFont", RelativeX + 4, RelativeY - HUDHeight + h + 5, ConVars.Job2, 0)
-end
+	draw.DrawText(JobWallet, "Trebuchet18", RelativeX + 5, RelativeY - HUDHeight + h + 6, ConVars.Job1, 0)
+	draw.DrawText(JobWallet, "Trebuchet18", RelativeX + 4, RelativeY - HUDHeight + h + 5, ConVars.Job2, 0)
+end*/
 
-local Page = surface.GetTextureID("gui/silkicons/page")
+local Page = surface.GetTextureID("gui/silkicons/check_on") 
 local function GunLicense()
 	if LocalPlayer().DarkRPVars.HasGunlicense then
-		local QuadTable = {}
-
+		local QuadTable = {}  
+		
 		QuadTable.texture 	= Page
-		QuadTable.color		= Color( 255, 255, 255, 100 )
-
-		QuadTable.x = RelativeX + HUDWidth + 31
-		QuadTable.y = ScrH() - 32
-		QuadTable.w = 32
-		QuadTable.h = 32
+		QuadTable.color		= Color( 255, 255, 255, 100 )  
+		
+		QuadTable.x = RelativeX + HUDWidth + 31 --31
+		QuadTable.y = ScrH() - 16 --32
+		QuadTable.w = 16 --32
+		QuadTable.h = 16 --32
 		draw.TexturedQuad(QuadTable)
 	end
 end
@@ -134,9 +228,9 @@ local function Agenda()
 		draw.RoundedBox(10, 10, 10, 460, 110, Color(0, 0, 0, 155))
 		draw.RoundedBox(10, 12, 12, 456, 106, Color(51, 58, 51,100))
 		draw.RoundedBox(10, 12, 12, 456, 20, Color(0, 0, 70, 100))
-
+		
 		draw.DrawText(DrawAgenda.Title, "ScoreboardText", 30, 12, Color(255,0,0,255),0)
-
+		
 		local AgendaText = ""
 		for k,v in pairs(team.GetPlayers(AgendaManager)) do
 			AgendaText = AgendaText .. (v.DarkRPVars.agenda or "")
@@ -166,8 +260,7 @@ local function LockDown()
 	local chbxX, chboxY = chat.GetChatBoxPos()
 	if util.tobool(GetConVarNumber("DarkRP_LockDown")) then
 		local cin = (math.sin(CurTime()) + 1) / 2
-		local chatBoxSize = math.floor(ScrH() / 4)
-		draw.DrawText(LANGUAGE.lockdown_started, "ScoreboardSubtitle", chbxX, chboxY + chatBoxSize, Color(cin * 255, 0, 255 - (cin * 255), 255), TEXT_ALIGN_LEFT)
+		draw.DrawText(LANGUAGE.lockdown_started, "ScoreboardSubtitle", chbxX, chboxY + 260, Color(cin * 255, 0, 255 - (cin * 255), 255), TEXT_ALIGN_LEFT)
 	end
 end
 
@@ -176,11 +269,11 @@ local Arrested = function() end
 usermessage.Hook("GotArrested", function(msg)
 	local StartArrested = CurTime()
 	local ArrestedUntil = msg:ReadFloat()
-
+	
 	Arrested = function()
 		if CurTime() - StartArrested <= ArrestedUntil and LocalPlayer().DarkRPVars.Arrested then
 		draw.DrawText(string.format(LANGUAGE.youre_arrested, math.ceil(ArrestedUntil - (CurTime() - StartArrested))), "ScoreboardText", ScrW()/2, ScrH() - ScrH()/12, Color(255,255,255,255), 1)
-		elseif not LocalPlayer().DarkRPVars.Arrested then
+		elseif not LocalPlayer().DarkRPVars.Arrested then 
 			Arrested = function() end
 		end
 	end
@@ -191,13 +284,13 @@ local AdminTell = function() end
 usermessage.Hook("AdminTell", function(msg)
 	local Message = msg:ReadString()
 
-	AdminTell = function()
+	AdminTell = function() 
 		draw.RoundedBox(4, 10, 10, ScrW() - 20, 100, Color(0, 0, 0, 255))
 		draw.DrawText(LANGUAGE.listen_up, "GModToolName", ScrW() / 2 + 10, 10, Color(255, 255, 255, 255), 1)
 		draw.DrawText(Message, "ChatFont", ScrW() / 2 + 10, 65, Color(200, 30, 30, 255), 1)
 	end
 
-	timer.Simple(10, function()
+	timer.Simple(10, function() 
 		AdminTell = function() end
 	end)
 end)
@@ -210,10 +303,11 @@ local function DrawHUD()
 	RelativeX, RelativeY = 0, Scrh
 
 	--Background
-	draw.RoundedBox(6, 0, Scrh - HUDHeight, HUDWidth, HUDHeight, ConVars.background)
+	//draw.RoundedBox(6, 0, Scrh - HUDHeight, HUDWidth, HUDHeight, ConVars.background)
 
-	DrawHealth()
-	DrawInfo()
+	//DrawHealth()
+	//DrawInfo()
+	DrawPlayerInfo()
 	GunLicense()
 	Agenda()
 	JobHelp()
@@ -228,27 +322,22 @@ end
 Entity HUDPaint things
 ---------------------------------------------------------------------------*/
 local function DrawPlayerInfo(ply)
+	
 	local pos = ply:EyePos()
 
 	pos.z = pos.z + 34
 	pos = pos:ToScreen()
 
 	if GetConVarNumber("nametag") == 1 then
-		draw.DrawText(ply:Nick(), "TargetID", pos.x + 1, pos.y + 1, Color(0, 0, 0, 255), 1)
-		draw.DrawText(ply:Nick(), "TargetID", pos.x, pos.y, team.GetColor(ply:Team()), 1)
-		draw.DrawText(LANGUAGE.health ..ply:Health(), "TargetID", pos.x + 1, pos.y + 21, Color(0, 0, 0, 255), 1)
-		draw.DrawText(LANGUAGE.health..ply:Health(), "TargetID", pos.x, pos.y + 20, Color(255,255,255,200), 1)
+		draw.DrawText(ply:Nick(), "Trebuchet24", pos.x + 1, pos.y + 1, Color(0, 0, 0, 200), 1)
+		draw.DrawText(ply:Nick(), "Trebuchet24", pos.x, pos.y, team.GetColor(ply:Team()), 1)
+		--draw.DrawText(LANGUAGE.health ..ply:Health(), "TargetID", pos.x + 1, pos.y + 21, Color(0, 0, 0, 255), 1)
+		--draw.DrawText(LANGUAGE.health..ply:Health(), "TargetID", pos.x, pos.y + 20, Color(255,255,255,200), 1)
 	end
 
 	if GetConVarNumber("jobtag") == 1 then
-		draw.DrawText(ply.DarkRPVars.job or "", "TargetID", pos.x + 1, pos.y + 41, Color(0, 0, 0, 255), 1)
-		draw.DrawText(ply.DarkRPVars.job or "", "TargetID", pos.x, pos.y + 40, Color(255, 255, 255, 200), 1)
-	end
-
-	if ply.DarkRPVars.HasGunlicense then
-		surface.SetTexture(surface.GetTextureID("gui/silkicons/page"))
-		surface.SetDrawColor(255,255,255,255)
-		surface.DrawTexturedRect(pos.x-16, pos.y + 60, 32, 32)
+		draw.DrawText(ply.DarkRPVars.job or "", "Trebuchet24", pos.x + 1, pos.y + 21, Color(0, 0, 0, 200), 1)
+		draw.DrawText(ply.DarkRPVars.job or "", "Trebuchet24", pos.x, pos.y + 20, Color(255, 255, 255, 255), 1)
 	end
 end
 
@@ -262,12 +351,12 @@ local function DrawWantedInfo(ply)
 	pos = pos:ToScreen()
 
 	if GetConVarNumber("nametag") == 1 then
-		draw.DrawText(ply:Nick(), "TargetID", pos.x + 1, pos.y + 1, Color(0, 0, 0, 255), 1)
-		draw.DrawText(ply:Nick(), "TargetID", pos.x, pos.y, team.GetColor(ply:Team()), 1)
+		draw.DrawText(ply:Nick(), "Trebuchet24", pos.x + 1, pos.y + 1, Color(0, 0, 0, 255), 1)
+		draw.DrawText(ply:Nick(), "Trebuchet24", pos.x, pos.y, team.GetColor(ply:Team()), 1)
 	end
 
-	draw.DrawText(LANGUAGE.wanted.."\nReason: "..tostring(ply.DarkRPVars["wantedReason"]), "TargetID", pos.x, pos.y - 40, Color(255, 255, 255, 200), 1)
-	draw.DrawText(LANGUAGE.wanted.."\nReason: "..tostring(ply.DarkRPVars["wantedReason"]), "TargetID", pos.x + 1, pos.y - 41, Color(255, 0, 0, 255), 1)
+	draw.DrawText(LANGUAGE.wanted.."\nReason: "..tostring(ply.DarkRPVars["wantedReason"]), "Trebuchet24", pos.x, pos.y - 40, Color(255, 255, 255, 200), 1)
+	draw.DrawText(LANGUAGE.wanted.."\nReason: "..tostring(ply.DarkRPVars["wantedReason"]), "Trebuchet24", pos.x + 1, pos.y - 41, Color(255, 0, 0, 255), 1)
 end
 
 /*---------------------------------------------------------------------------
@@ -304,8 +393,8 @@ local function DrawZombieInfo()
 		local zPoint = LocalPlayer().DarkRPVars["zPoints".. x]
 		if zPoint then
 			zPoint = zPoint:ToScreen()
-			draw.DrawText("Zombie Spawn (" .. x .. ")", "TargetID", zPoint.x, zPoint.y - 20, Color(255, 255, 255, 200), 1)
-			draw.DrawText("Zombie Spawn (" .. x .. ")", "TargetID", zPoint.x + 1, zPoint.y - 21, Color(255, 0, 0, 255), 1)
+			draw.DrawText("Zombie Spawn (" .. x .. ")", "Trebuchet24", zPoint.x, zPoint.y - 20, Color(255, 255, 255, 200), 1)
+			draw.DrawText("Zombie Spawn (" .. x .. ")", "Trebuchet24", zPoint.x + 1, zPoint.y - 21, Color(255, 0, 0, 255), 1)
 		end
 	end
 end
